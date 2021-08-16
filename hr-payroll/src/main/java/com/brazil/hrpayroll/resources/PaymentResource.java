@@ -1,6 +1,6 @@
 package com.brazil.hrpayroll.resources;
 
-import com.brazil.hrpayroll.entities.Payment;
+import com.brazil.hrpayroll.responses.PaymentResponse;
 import com.brazil.hrpayroll.services.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class PaymentResource {
     private final PaymentService paymentService;
 
     @GetMapping(value = "/{workerID}/days/{days}")
-    public ResponseEntity<Payment> getPayment(@PathVariable Long workerID, @PathVariable Integer days) {
+    public ResponseEntity<PaymentResponse> getPayment(@PathVariable Long workerID, @PathVariable Integer days) {
         return new ResponseEntity<>(paymentService.getPayment(workerID, days), HttpStatus.OK);
     }
 
