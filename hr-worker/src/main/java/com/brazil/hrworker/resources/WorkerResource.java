@@ -3,6 +3,9 @@ package com.brazil.hrworker.resources;
 import com.brazil.hrworker.responses.WorkerResponse;
 import com.brazil.hrworker.services.WorkerService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WorkerResource {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(WorkerResource.class);
+
     private final WorkerService workerService;
+    private final Environment environment;
 
     @GetMapping
     public ResponseEntity<List<WorkerResponse>> list() {
@@ -26,6 +32,7 @@ public class WorkerResource {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<WorkerResponse> findById(@PathVariable long id) {
+        LOGGER.info("PORT = " + environment.getProperty("local.server.port"));
         return new ResponseEntity(workerService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
     }
 
