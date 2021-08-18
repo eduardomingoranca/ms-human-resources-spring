@@ -27,4 +27,8 @@ public class PaymentService {
         return PaymentMapper.INSTANCE.toPaymentResponse(payment);
     }
 
+    public PaymentResponse getPaymentAlternative(Integer days) {
+        Payment payment = new Payment("Brann", 400.0, days);
+        return PaymentMapper.INSTANCE.toPaymentResponse(payment);
+    }
 }
