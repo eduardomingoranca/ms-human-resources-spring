@@ -1,6 +1,6 @@
 package com.brazil.hroauth.feignclients;
 
-import com.brazil.hroauth.responses.UserResponse;
+import com.brazil.hroauth.entities.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,5 +14,5 @@ public interface UserFeignClient {
     /**
      * assinatura de metodos*/
     @GetMapping(path = "/search")
-    ResponseEntity<UserResponse> findByEmail(@RequestParam String email);
+    ResponseEntity<User> findByEmail(@RequestParam String email);
 }

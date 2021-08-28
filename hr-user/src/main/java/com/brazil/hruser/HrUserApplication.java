@@ -12,7 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class HrUserApplication implements CommandLineRunner {
 
-//	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+/**
+ *  private final BCryptPasswordEncoder bCryptPasswordEncoder; */
 
 	public static void main(String[] args) {
 		SpringApplication.run(HrUserApplication.class, args);
@@ -20,6 +21,7 @@ public class HrUserApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-	//	System.out.println("BCRYPT = " + bCryptPasswordEncoder.encode("123456"));
+	/**
+	 *  System.out.println("BCRYPT = " + bCryptPasswordEncoder.encode("123456")); */
 	}
 }

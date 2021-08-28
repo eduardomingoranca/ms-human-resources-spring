@@ -1,9 +1,8 @@
 package com.brazil.hruser.services;
 
+import com.brazil.hruser.entities.User;
 import com.brazil.hruser.exceptions.BadRequestException;
-import com.brazil.hruser.mappers.UserMapper;
 import com.brazil.hruser.repositories.UserRepository;
-import com.brazil.hruser.responses.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +12,13 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserResponse findByIdOrThrowBadRequestException(long id) {
-        return UserMapper.INSTANCE.toWorkerResponse(userRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("User not Found")));
+    public User findByIdOrThrowBadRequestException(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("User not Found"));
     }
 
-    public UserResponse findByEmail(String email) {
-        return UserMapper.INSTANCE.toWorkerResponse(userRepository.findByEmail(email)
-                .orElseThrow(() -> new BadRequestException("Email not Found")));
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new BadRequestException("Email not Found"));
     }
 }
