@@ -22,6 +22,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private final JwtTokenStore tokenStore;
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * metodo de segurança de acesso e checagem do token.*/
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
