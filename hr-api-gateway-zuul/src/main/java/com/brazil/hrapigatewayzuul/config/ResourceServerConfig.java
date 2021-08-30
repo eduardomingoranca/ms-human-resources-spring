@@ -28,6 +28,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     /**
      * constante responsavel por receber os caminhos/rotas de autorização do operador. */
     private static final String[] OPERATOR = { "/hr-worker/**" };
+
     /**
      * constante responsavel por receber os caminhos/rotas de autorização do administrador. */
     private static final String[] ADMIN = { "/hr-payroll/**", "/hr-user/**" };
