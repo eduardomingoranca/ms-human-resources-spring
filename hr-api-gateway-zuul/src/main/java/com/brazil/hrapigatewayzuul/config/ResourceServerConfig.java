@@ -1,13 +1,23 @@
 package com.brazil.hrapigatewayzuul.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+
+import java.util.Arrays;
 
 /**
  * Resource server >> responsavel por receber requisições do usuário via token e avalia
@@ -49,6 +59,43 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, OPERATOR).hasAnyRole("OPERATOR", "ADMIN")
                 .antMatchers(ADMIN).hasRole("ADMIN") /** hasRole, hasAnyRole >> metodo para receber os papeis de permissão. */
                 .anyRequest().authenticated();
+                
+                http.cors().configurationSource(corsConfigurationSource());
+    }
+
+    /**
+     * metodo de configuração do CORS */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        /**
+         * permitindo as origens para acessar o sistema. */
+        corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
+        /**
+         * permitindo os metodos para acessar o sistema. */
+        corsConfiguration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
+        /**
+         * permitindo as credenciais para acessar o sistema. */
+        corsConfiguration.setAllowCredentials(true);
+        /**
+         * permitindo os cabeçalhos para acessar o sistema. */
+        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+
+        /**
+         * configurando os caminhos/rotas para acessar o sistema */
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+
+        return source;
+    }
+
+    /**
+     * metodo de filtro de registro de CORS*/
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilter() {
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
     }
 
 }
