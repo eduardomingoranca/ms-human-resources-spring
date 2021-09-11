@@ -26,9 +26,9 @@ public class WorkerResource {
     private static Logger LOGGER = LoggerFactory.getLogger(WorkerResource.class);
 
     /**
-     * acessando as configurações */
+     * acessando as configurações
     @Value("${test.config}")
-    private String testConfig;
+    private String testConfig; */
 
     private final WorkerService workerService;
     private final Environment environment;
@@ -37,7 +37,7 @@ public class WorkerResource {
      * recebendo as configurações */
     @GetMapping(value = "/configs")
     public ResponseEntity<Void> getConfigs() {
-        LOGGER.info("CONFIG = " + testConfig);
+    /**    LOGGER.info("CONFIG = " + testConfig); */
         return ResponseEntity.noContent().build();
     }
 
@@ -49,11 +49,12 @@ public class WorkerResource {
     @GetMapping(path = "/{id}")
     public ResponseEntity<WorkerResponse> findById(@PathVariable long id) {
 
+        /**
         try {
             Thread.sleep(300L);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        } */
 
         LOGGER.info("PORT = " + environment.getProperty("local.server.port"));
         return new ResponseEntity(workerService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
