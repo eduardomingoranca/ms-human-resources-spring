@@ -1,6 +1,6 @@
 # Microsservies Human Resources
 ## 💻 Descrição do projeto
-![microservice](https://github.com/eduardomingoranca/ms-spring/blob/main/arquitetura-microservices.PNG) 
+![microservice](https://github.com/eduardomingoranca/ms-spring/blob/main/aquitetura-microservices.PNG) 
 
 Projeto de API REST utilizando a linguagem Java com o framework Spring de um sistema de recursos humanos
 onde, teremos os microservices de trabalhador (hr-worker), folha de pagamento (hr-payroll), cadastro de usuários (hr-user) e o
